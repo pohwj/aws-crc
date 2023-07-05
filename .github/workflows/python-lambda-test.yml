@@ -28,4 +28,4 @@ jobs:
       run: |
         cd unittest
         pip install pytest
-        pytest 
+        pytest test_view_count_neelaupa_table.py
