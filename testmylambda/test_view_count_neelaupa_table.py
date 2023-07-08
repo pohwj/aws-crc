@@ -3,8 +3,10 @@ from unittest.mock import patch, MagicMock
 from view_count_neelaupa_table import lambda_handler  
 
 class TestLambdaHandler(unittest.TestCase):
-    @patch('view_count_neelaupa_table.table')
-    def test_lambda_handler(self, mock_table):
+    @patch('boto3.resource')
+    def test_lambda_handler(self, mock_resource):
+        mock_table = MagicMock()
+        mock_resource.return_value.Table.return_value = mock_table
         mock_table.get_item.return_value = {
             'Item': {
                 'id': '0',
