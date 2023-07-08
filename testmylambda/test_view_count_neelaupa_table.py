@@ -1,27 +1,29 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from view_count_neelaupa_table import lambda_handler  
+import view_count_neelaupa_table 
 
 class TestLambdaHandler(unittest.TestCase):
-    @patch('boto3.resource')
-    def test_lambda_handler(self, mock_resource):
-        mock_table = MagicMock()
-        mock_resource.return_value.Table.return_value = mock_table
+    @patch('view_count_neelaupa_table.table')
+    def test_lambda_handler(self, mock_table):
+        initial_views = 5
         mock_table.get_item.return_value = {
             'Item': {
                 'id': '0',
-                'views': 1
+                'views': initial_views
             }
         }
-        mock_table.put_item.return_value = {}
-        expected = 2
-        actual = lambda_handler({}, {})
-        self.assertEqual(expected, actual)
-        mock_table.get_item.assert_called_once_with(Key={'id': '0'})
-        mock_table.put_item.assert_called_once_with(Item={'id': '0', 'views': 2})
-        
-        
 
+        # call the lambda handler function
+        result = view_count_neelaupa_table.lambda_handler({}, {})
+        # print(result)
+
+        # assert the result
+        self.assertEqual(result, initial_views + 1)
+        mock_table.get_item.assert_called_once_with(Key={'id': '0'})
+        mock_table.put_item.assert_called_once_with(Item={'id': '0', 'views': initial_views + 1})
+    
+
+        
 if __name__ == '__main__':
     unittest.main()
 
