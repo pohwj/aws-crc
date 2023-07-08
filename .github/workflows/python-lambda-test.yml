@@ -1,12 +1,9 @@
 name : python lambda test
 
 on:
-  workflow_dispatch:
   push:
-    branches: 
-    - main
-    paths:
-    - 'unittest/**'
+    branches: [ main ]
+    
 
 jobs:
   build:
