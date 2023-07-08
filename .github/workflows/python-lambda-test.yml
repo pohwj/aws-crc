@@ -25,4 +25,5 @@ jobs:
     - name: test python lambda
       run: |
         cd unittest
-        python -m unittest test_view_count_neelaupa_table
+        pip install pytest
+        pytest test_view_count_neelaupa_table.py
