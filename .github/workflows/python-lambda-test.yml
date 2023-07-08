@@ -26,4 +26,5 @@ jobs:
       run: |
         cd testmylambda
         pip install pytest
+        export AWS_DEFAULT_REGION=ap-southeast-1
         python -m pytest test_view_count_neelaupa_table.py
