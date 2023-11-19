@@ -2,9 +2,11 @@ name : Upload frontend website to S3
 
 on:
   push:
-    branches:
-    - main
-
+    branches: [ main ]
+    paths: 
+    - 'frontend/**'
+    
+    
 jobs:
   deploy:
     runs-on: ubuntu-latest
