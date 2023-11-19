@@ -3,6 +3,8 @@ name : python lambda test
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'testmylambda/**'
     
 
 jobs:
